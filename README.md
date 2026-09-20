@@ -1,9 +1,5 @@
-# 📄 File `README.md` untuk Project Portofolio
-
-Copy-paste ini ke file **`README.md`** di root project (`D:\root_website\portofolio\README.md`):
-
 ```markdown
-<div align="center">
+
 
 # 🎨 Portofolio Wisnu Wibisono
 
@@ -76,10 +72,15 @@ Project ini melayani **2 domain** dari 1 codebase:
 | **Library** | jQuery 3.7, Font Awesome 6 |
 
 ---
+```
+
+
+
+```markdown
+
 
 ## 📁 Struktur Folder
 
-```
 portofolio/
 ├── 📁 assets/                  # Aset statis
 │   ├── css/                    # Stylesheet
@@ -156,6 +157,9 @@ portofolio/
 ```
 
 ---
+```
+
+
 
 ## 🚀 Instalasi
 
@@ -341,44 +345,3 @@ Made with ❤️ in Kebumen, Indonesia
 
 ---
 
-## 🎯 Cara Pakai
-
-1. Buka **VS Code** → project `portofolio`
-2. Buat file baru **`README.md`** di root
-3. **Copy-paste** kode di atas
-4. **Save** (Ctrl+S)
-5. **Upload ke GitHub** (`git add .` → `git commit` → `git push`)
-
----
-
-## 🎁 Bonus — File LICENSE
-
-Kalau mau tambahkan lisensi, buat file **`LICENSE`** di root:
-
-```
-MIT License
-
-Copyright (c) 2026 Wisnu Wibisono
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
----
-
-**Copy README di atas, paste, save. Selesai!** 🚀
