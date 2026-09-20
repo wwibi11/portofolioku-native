@@ -1,0 +1,347 @@
+/* ============================================================
+   PORTOFOLIO - STYLE.CSS
+   ============================================================ */
+
+/* ==================== VARIABEL ==================== */
+:root {
+  --primary: #7c3aed;
+  --primary-dark: #6d28d9;
+  --primary-light: #a78bfa;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --footer-bg: #0f172a;
+  --footer-text: #94a3b8;
+  --footer-border: #1e293b;
+}
+
+/* ==================== RESET & BASE ==================== */
+* {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--text-dark);
+  padding-top: 80px;   /* karena navbar fixed */
+  background: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ==================== NAVBAR ==================== */
+.navbar {
+  padding: 1rem 0;
+  transition: 0.3s;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.navbar .nav-link {
+  color: var(--text-dark) !important;
+  font-size: 1rem;
+  padding: 0.5rem 1rem !important;
+  transition: 0.2s;
+}
+
+.navbar .nav-link:hover {
+  color: var(--primary) !important;
+}
+
+.navbar .nav-link.active {
+  color: var(--primary) !important;
+  font-weight: 600;
+}
+
+.brand-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-dark) !important;
+  text-transform: lowercase;
+  letter-spacing: -0.5px;
+}
+
+.brand-logo .text-primary {
+  color: var(--primary) !important;
+}
+
+/* ==================== SECTION ==================== */
+.section {
+  padding: 80px 0;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+}
+
+/* ==================== PORTFOLIO GRID ==================== */
+.portfolio-item {
+  margin-bottom: 3rem;
+}
+
+.portfolio-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.portfolio-thumb:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
+}
+
+.portfolio-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portfolio-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.portfolio-link {
+  display: inline-block;
+  color: var(--primary);
+  text-decoration: underline;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.portfolio-link:hover {
+  color: var(--primary-dark);
+}
+
+.portfolio-desc {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ==================== HERO ==================== */
+.hero {
+  padding: 100px 0 60px;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.hero .lead {
+  color: var(--text-muted);
+  font-size: 1.25rem;
+}
+
+/* ==================== TIMELINE (Pengalaman) ==================== */
+.timeline {
+  border-left: 3px solid var(--primary);
+  padding-left: 25px;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: var(--primary);
+  border-radius: 50%;
+  left: -33px;
+  top: 5px;
+  border: 3px solid white;
+  box-shadow: 0 0 0 3px var(--primary);
+}
+
+/* ==================== SECTION KONTAK (di atas footer) ==================== */
+.social-circle-light {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.social-circle-light:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+}
+
+/* ==================== FOOTER DARK ==================== */
+.footer-dark {
+  background: var(--footer-bg);
+  color: #cbd5e1;
+  padding: 70px 0 30px;
+  margin-top: 80px;
+}
+
+.footer-brand {
+  color: #fff;
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.footer-heading {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+
+.footer-contact {
+  color: var(--footer-text);
+  line-height: 1.9;
+}
+
+.footer-contact a {
+  color: var(--footer-text);
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.footer-contact a:hover {
+  color: #fff;
+}
+
+.footer-links {
+  line-height: 2;
+}
+
+.footer-links a {
+  color: var(--footer-text);
+  text-decoration: none;
+  transition: 0.2s;
+  font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  padding-left: 4px;
+}
+
+/* Divider */
+.footer-divider {
+  border-color: var(--footer-border);
+  opacity: 1;
+  margin: 20px 0 40px;
+}
+
+/* Sosial media bulat (versi gelap) */
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.social-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #334155;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.social-circle:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+}
+
+/* Copyright */
+.footer-copy {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.footer-credit {
+  color: var(--primary-light);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-credit:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ==================== SCROLL TO TOP ==================== */
+#scrollTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+  transition: 0.3s;
+  z-index: 999;
+}
+
+#scrollTop:hover {
+  background: var(--primary-dark);
+  transform: translateY(-4px);
+}
+
+#scrollTop.show {
+  display: flex;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.25rem; }
+  .section-title { font-size: 1.5rem; }
+  .portfolio-title { font-size: 1.35rem; }
+  .footer-brand { font-size: 1.5rem; }
+  .footer-dark { padding: 50px 0 20px; }
+}
