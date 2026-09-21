@@ -51,9 +51,16 @@ function menuLink($page, $portfolioBase) {
 <!-- ==================== NAVBAR ==================== -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top border-bottom">
   <div class="container">
-    <a class="navbar-brand brand-logo" href="<?= $portfolioBase ?>">
-      <?= e($brand1) ?><span class="text-primary"><?= e($brand2) ?></span>
+   <a class="navbar-brand brand-logo d-flex align-items-center" href="<?= $portfolioBase ?>">
+      <?php if (!empty($profil['logo']) && file_exists(UPLOAD_PATH . $profil['logo'])): ?>
+        <img src="<?= upload($profil['logo']) ?>" 
+            alt="<?= e($profil['nama'] ?? 'Logo') ?>"
+            style="height: 36px; width: auto; max-width: 160px; object-fit: contain;">
+      <?php else: ?>
+        <?= e($brand1) ?><span class="text-primary"><?= e($brand2) ?></span>
+      <?php endif; ?>
     </a>
+
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
