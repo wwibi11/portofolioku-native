@@ -995,3 +995,32 @@ img {
     font-size: 0.9rem !important;
   }
 }
+
+/* ============================================
+   NAVBAR — Amber Border + FIXED POSITION
+   (Paling bawah style.css)
+   ============================================ */
+
+.navbar {
+  border-bottom: 1px solid rgba(124, 58, 237, 0.08) !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1030 !important;
+}
+
+.navbar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(245, 158, 11, 0.4) 50%, 
+    transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}

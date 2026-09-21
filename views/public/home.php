@@ -117,6 +117,82 @@ $profil = db()->query("SELECT * FROM profil WHERE id = 1")->fetch() ?: [];
   </div>
 </section>
 
+
+
+<!-- SKILL SECTION -->
+<?php
+$skillsHome = db()->query("SELECT * FROM skills ORDER BY urutan ASC, id ASC LIMIT 8")->fetchAll();
+?>
+
+<?php if (!empty($skillsHome)): ?>
+<section class="section">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <h2 class="section-title">Skill & Keahlian</h2>
+        <p class="section-subtitle mb-0">Tools dan teknologi yang saya kuasai</p>
+      </div>
+      <a href="<?= BASE_URL ?>/?page=about" 
+         class="btn btn-outline-primary d-none d-md-inline-flex">
+        Selengkapnya <i class="bi bi-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="row g-3">
+      <?php foreach ($skillsHome as $s):
+        $level = (int)$s['level'];
+      ?>
+        <div class="col-md-6 col-lg-3">
+          <div style="background: rgba(255,255,255,0.5);
+                      border: 1px solid rgba(255,255,255,0.6);
+                      border-radius: 14px; padding: 18px;
+                      height: 100%; transition: all 0.3s ease;"
+               onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(124,58,237,0.1)'"
+               onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span style="font-weight: 700; color: #0f172a; font-size: 14px;">
+                <?= e($s['nama']) ?>
+              </span>
+              <span style="color: #7c3aed; font-weight: 800; font-size: 12px;
+                           background: rgba(124, 58, 237, 0.1);
+                           padding: 3px 10px; border-radius: 20px;">
+                <?= $level ?>%
+              </span>
+            </div>
+
+            <div style="height: 6px; background: rgba(245, 158, 11, 0.12);
+            border-radius: 10px; overflow: hidden;">
+              <div style="width: <?= $level ?>%; height: 100%;
+                          background: linear-gradient(90deg, #fbbf24, #f59e0b);
+                          border-radius: 10px;"></div>
+            </div>
+
+            <?php if (!empty($s['kategori'])): ?>
+              <div style="font-size: 11px; color: #94a3b8; margin-top: 8px;
+                          text-transform: uppercase; letter-spacing: 0.5px;
+                          font-weight: 600;">
+                <?= e(ucfirst($s['kategori'])) ?>
+              </div>
+            <?php endif; ?>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+
+    <!-- Mobile "Selengkapnya" button -->
+    <div class="text-center mt-4 d-md-none">
+      <a href="<?= BASE_URL ?>/?page=about" class="btn btn-outline-primary">
+        Lihat Semua Skill <i class="bi bi-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+
+
+
 <!-- Preview Blog -->
 <section class="section">
   <div class="container">
@@ -163,3 +239,5 @@ $profil = db()->query("SELECT * FROM profil WHERE id = 1")->fetch() ?: [];
     </div>
   </div>
 </section>
+
+
