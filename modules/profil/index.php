@@ -133,7 +133,7 @@ if (!$profil) {
                             </div>
                         </div>
 
-                        <!-- Upload Logo Brand -->
+                       <!-- Upload Logo Brand -->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -145,7 +145,7 @@ if (!$profil) {
                                     </small>
 
                                     <!-- Preview Logo -->
-                                    <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center gap-3 flex-wrap">
                                         <div id="logoPreview"
                                             style="width: 120px; height: 60px; background: #f8f9fc;
                                                     border: 2px dashed #cbd5e1; border-radius: 10px;
@@ -159,7 +159,7 @@ if (!$profil) {
                                             <?php endif; ?>
                                         </div>
 
-                                        <div style="flex: 1;">
+                                        <div style="flex: 1; min-width: 200px;">
                                             <input type="hidden" name="logo_lama" value="<?= htmlspecialchars($profil['logo'] ?? '') ?>">
                                             <input type="file" name="logo" id="logoInput"
                                                 class="form-control-file" accept="image/*"
@@ -169,6 +169,17 @@ if (!$profil) {
                                                 Format: PNG, SVG, WebP, JPG. Max 2MB. Rasio ideal 3:1.
                                             </small>
                                         </div>
+
+                                        <!-- TOMBOL HAPUS LOGO -->
+                                        <?php if (!empty($profil['logo']) && file_exists(UPLOAD_PATH . $profil['logo'])): ?>
+                                            <a href="?module=profil&action=hapus_logo"
+                                            onclick="return confirm('Yakin hapus logo? Navbar akan kembali ke text brand.');"
+                                            class="btn btn-sm btn-outline-danger"
+                                            style="border-radius: 8px; font-size: 12px; padding: 8px 14px;
+                                                    white-space: nowrap;">
+                                                <i class="fas fa-trash"></i> Hapus Logo
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
 
                                 </div>
