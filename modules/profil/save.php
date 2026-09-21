@@ -48,6 +48,20 @@ if (!empty($_FILES['foto']['name'])) {
     }
 }
 
+// Handle upload logo
+$logo = $_POST['logo_lama'] ?? '';
+if (!empty($_FILES['logo']['name'])) {
+    $result = uploadImage($_FILES['logo'], 'logo');
+    if (!empty($result['success'])) {
+        if (!empty($_POST['logo_lama'])) {
+            deleteUpload($_POST['logo_lama']);
+        }
+        $logo = $result['filename'];
+    } else {
+        setFlash('warning', 'Upload logo gagal: ' . ($result['message'] ?? 'Unknown'));
+    }
+}
+
 // Handle upload CV (PDF)
 $cvFile = $_POST['cv_lama'] ?? '';
 if (!empty($_FILES['cv_file']['name'])) {
@@ -74,12 +88,12 @@ if (!empty($_FILES['cv_file']['name'])) {
 
 // Simpan ke DB
 try {
-    // Cek apakah baris profil sudah ada
     $exists = (int) db()->query("SELECT COUNT(*) FROM profil WHERE id = 1")->fetchColumn();
 
     if ($exists) {
         $sql = "UPDATE profil SET
                     nama = :nama,
+                    logo = :logo,
                     gelar_akademik = :gelar_akademik,
                     brand_1 = :brand1,
                     brand_2 = :brand2,
@@ -104,12 +118,12 @@ try {
                 WHERE id = 1";
     } else {
         $sql = "INSERT INTO profil
-                    (id, nama, gelar_akademik, brand_1, brand_2, gelar, bio, foto,
+                    (id, nama, logo, gelar_akademik, brand_1, brand_2, gelar, bio, foto,
                      email, telepon, whatsapp, telegram, alamat, website,
                      github, linkedin, instagram, threads, facebook, twitter,
                      youtube, tiktok, cv_file)
                 VALUES
-                    (1, :nama, :gelar_akademik, :brand1, :brand2, :gelar, :bio, :foto,
+                    (1, :nama, :logo, :gelar_akademik, :brand1, :brand2, :gelar, :bio, :foto,
                      :email, :telepon, :wa, :tg, :alamat, :website,
                      :github, :linkedin, :ig, :threads, :fb, :tw,
                      :yt, :tt, :cv)";
@@ -117,6 +131,7 @@ try {
 
     $params = [
         ':nama'            => $nama,
+        ':logo'            => $logo,  // ← TAMBAH INI
         ':gelar_akademik'  => $gelarAkademik,
         ':brand1'          => $brand1,
         ':brand2'          => $brand2,

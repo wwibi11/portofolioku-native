@@ -15,8 +15,8 @@ try {
 // Kalau belum ada, siapkan default
 if (!$profil) {
     $profil = [
-        'id' => 1, 'nama' => '', 'gelar_akademik' => '',
-        'brand_1' => 'wisnu', 'brand_2' => 'wibisono',
+        'id' => 1, 'nama' => '', 'logo' => '', 
+        'gelar_akademik' => '', 'brand_1' => 'wisnu', 'brand_2' => 'wibisono',
         'gelar' => '', 'bio' => '', 'foto' => '',
         'email' => '', 'telepon' => '', 'whatsapp' => '', 'telegram' => '',
         'alamat' => '', 'website' => '', 'github' => '', 'linkedin' => '',
@@ -129,6 +129,48 @@ if (!$profil) {
                                            value="<?= htmlspecialchars($profil['brand_2'] ?? 'wibisono') ?>"
                                            placeholder="wibisono" maxlength="50">
                                     <small class="text-muted">Logo navbar kanan (ungu).</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upload Logo Brand -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" style="font-size: 13px;">
+                                        <i class="fas fa-image text-muted"></i> Logo Brand
+                                    </label>
+                                    <small class="text-muted d-block mb-2">
+                                        Opsional. Kalau kosong, otomatis pakai text brand.
+                                    </small>
+
+                                    <!-- Preview Logo -->
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div id="logoPreview"
+                                            style="width: 120px; height: 60px; background: #f8f9fc;
+                                                    border: 2px dashed #cbd5e1; border-radius: 10px;
+                                                    display: flex; align-items: center; justify-content: center;
+                                                    overflow: hidden; flex-shrink: 0;">
+                                            <?php if (!empty($profil['logo']) && file_exists(UPLOAD_PATH . $profil['logo'])): ?>
+                                                <img src="<?= upload($profil['logo']) ?>"
+                                                    style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                            <?php else: ?>
+                                                <span class="text-muted" style="font-size: 11px;">No Logo</span>
+                                            <?php endif; ?>
+                                        </div>
+
+                                        <div style="flex: 1;">
+                                            <input type="hidden" name="logo_lama" value="<?= htmlspecialchars($profil['logo'] ?? '') ?>">
+                                            <input type="file" name="logo" id="logoInput"
+                                                class="form-control-file" accept="image/*"
+                                                onchange="previewLogo(this)"
+                                                style="font-size: 12px;">
+                                            <small class="text-muted d-block mt-1">
+                                                Format: PNG, SVG, WebP, JPG. Max 2MB. Rasio ideal 3:1.
+                                            </small>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -428,4 +470,19 @@ function previewFoto(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+function previewLogo(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var el = document.getElementById('logoPreview');
+            el.innerHTML = '<img src="' + e.target.result +
+                '" style="max-width: 100%; max-height: 100%; object-fit: contain;">';
+            el.style.border = '2px solid #7c3aed';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 </script>
+
