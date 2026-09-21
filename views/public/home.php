@@ -2,6 +2,7 @@
 // Ambil data profil
 $profil = db()->query("SELECT * FROM profil WHERE id = 1")->fetch() ?: [];
 ?>
+<!-- HERO -->
 <section class="hero">
   <div class="container">
     <div class="row align-items-center">
@@ -10,68 +11,65 @@ $profil = db()->query("SELECT * FROM profil WHERE id = 1")->fetch() ?: [];
       <div class="col-lg-7">
         <h1 class="mb-3">
           Halo, saya
-          <span style="color:var(--primary)">
-            <?= e($profil['nama'] ?? 'Nama Anda') ?><?= !empty($profil['gelar_akademik']) ? ', ' . e($profil['gelar_akademik']) : '' ?>
+          <span style="color: #7c3aed;">
+            <?= e($profil['nama'] ?? 'Nama') ?><?= !empty($profil['gelar_akademik']) ? ', ' . e($profil['gelar_akademik']) : '' ?>
           </span>
         </h1>
 
-        <p class="lead mb-4">
-          <?= e($profil['gelar'] ?? 'Web Developer & UI Designer') ?>
+        <p class="lead mb-3" style="color: #7c3aed; font-weight: 600;">
+          <?= e($profil['gelar'] ?? 'Web Developer') ?>
         </p>
 
-       <?php
-      $bioFull = trim($profil['bio'] ?? '');
-      $bioLimit = 300;
-      $bioShort = excerpt($bioFull, $bioLimit);
-      $bioTruncated = strlen($bioFull) > $bioLimit;
-      ?>
+        <?php
+        $bioFull = trim($profil['bio'] ?? '');
+        $bioLimit = 300;
+        $bioShort = excerpt($bioFull, $bioLimit);
+        $bioTruncated = strlen($bioFull) > $bioLimit;
+        ?>
 
-      <p class="mb-4" style="max-width:640px; color:var(--text-muted); line-height:1.75;">
-        <?= e($bioShort) ?>
-        <?php if ($bioTruncated): ?>
-          <a href="<?= BASE_URL ?>/?page=about"
-            style="color:#7c3aed; text-decoration:none; font-weight:600; white-space:nowrap;">
-            Selengkapnya →
-          </a>
-        <?php endif; ?>
-      </p>
+        <!-- BIO — dengan fallback -->
+        <p class="hero-bio mb-4" style="color: #64748b; line-height: 1.75;">
+          <?php if ($bioFull === ''): ?>
+            <em style="color: #94a3b8;">Bio belum diisi.</em>
+          <?php else: ?>
+            <?= e($bioShort) ?>
+            <?php if ($bioTruncated): ?>
+              <a href="<?= BASE_URL ?>/?page=about"
+                 style="color: #7c3aed; text-decoration: none; font-weight: 600; white-space: nowrap;">
+                Selengkapnya →
+              </a>
+            <?php endif; ?>
+          <?php endif; ?>
+        </p>
 
         <div class="d-flex gap-2 flex-wrap">
-          <a href="<?= BASE_URL ?>/?page=contact" class="btn btn-primary px-4 py-2">
-            <i class="bi bi-envelope"></i> Hubungi Saya
+          <a href="<?= BASE_URL ?>/?page=contact" class="btn btn-primary">
+            <i class="bi bi-envelope-fill"></i> Hubungi Saya
           </a>
-          <a href="<?= BASE_URL ?>/?page=projects" class="btn btn-outline-dark px-4 py-2">
-            Lihat Portfolio
+          <a href="<?= BASE_URL ?>/?page=projects" class="btn btn-outline-dark">
+            <i class="bi bi-folder2-open"></i> Lihat Portfolio
           </a>
         </div>
       </div>
 
-      <!-- KANAN: Foto -->
-      <div class="col-lg-5 text-center mt-5 mt-lg-0">
-        <div style="position: relative; display: inline-block;">
-          <!-- Blob background -->
-          <div style="position: absolute; inset: -20px;
-                      background: linear-gradient(135deg, #ede9fe, #f5f3ff);
-                      border-radius: 50%; z-index: 0;
-                      box-shadow: 0 20px 60px rgba(124,58,237,0.15);"></div>
-
-          <?php if (!empty($profil['foto']) && file_exists(UPLOAD_PATH . $profil['foto'])): ?>
-            <img src="<?= UPLOAD_URL . e($profil['foto']) ?>"
-                 alt="<?= e($profil['nama']) ?>"
-                 class="rounded-circle shadow"
-                 style="width: 320px; height: 320px; object-fit: cover;
-                        position: relative; z-index: 1;
-                        border: 4px solid #fff;">
-          <?php else: ?>
-            <div style="width: 320px; height: 320px; background: #f5f3ff;
-                        border-radius: 50%; display: flex; align-items: center;
-                        justify-content: center; color: #7c3aed; font-size: 6rem;
-                        position: relative; z-index: 1;
-                        border: 4px solid #fff;">
-              <i class="bi bi-person-circle"></i>
-            </div>
-          <?php endif; ?>
-        </div>
+      <!-- KANAN: Foto — simple, TANPA blob -->
+      <div class="col-lg-5 text-center mt-4 mt-lg-0">
+        <?php if (!empty($profil['foto']) && file_exists(UPLOAD_PATH . $profil['foto'])): ?>
+          <img src="<?= upload($profil['foto']) ?>"
+               alt="<?= e($profil['nama']) ?>"
+               class="hero-photo"
+               style="width: 220px; height: 220px; object-fit: cover;
+                      border-radius: 50%; border: 4px solid #fff;
+                      box-shadow: 0 10px 30px rgba(124,58,237,0.15);">
+        <?php else: ?>
+          <div style="width: 220px; height: 220px; margin: 0 auto;
+                      background: #ede9fe; border-radius: 50%;
+                      display: flex; align-items: center; justify-content: center;
+                      color: #7c3aed; font-size: 5rem;
+                      border: 4px solid #fff;">
+            <i class="bi bi-person-fill"></i>
+          </div>
+        <?php endif; ?>
       </div>
 
     </div>
