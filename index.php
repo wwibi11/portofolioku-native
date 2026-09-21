@@ -130,7 +130,7 @@ if ($module) {
     // ============================================================
     // ACTION YANG BUTUH REDIRECT → jalankan SEBELUM output HTML
     // ============================================================
-    $redirectActions = ['save', 'delete', 'store', 'update', 'destroy'];
+    $redirectActions = ['save', 'delete', 'store', 'update', 'destroy', 'hapus_logo'];
 
     if (in_array($action, $redirectActions)) {
         require_once $file;
