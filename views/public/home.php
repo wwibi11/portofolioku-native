@@ -19,15 +19,22 @@ $profil = db()->query("SELECT * FROM profil WHERE id = 1")->fetch() ?: [];
           <?= e($profil['gelar'] ?? 'Web Developer & UI Designer') ?>
         </p>
 
-        <p class="mb-4" style="max-width:600px; color:var(--text-muted); line-height:1.7;">
-          <?= e(excerpt($profil['bio'] ?? 'Saya membuat website modern, cepat, dan mudah digunakan.', 180)) ?>
-          <?php if (strlen($profil['bio'] ?? '') > 300): ?>
-            <a href="<?= BASE_URL ?>/?page=about"
-              style="color:#7c3aed; text-decoration:none; font-weight:600; white-space:nowrap;">
-              Selengkapnya →
-            </a>
-          <?php endif; ?>
-        </p>
+       <?php
+      $bioFull = trim($profil['bio'] ?? '');
+      $bioLimit = 300;
+      $bioShort = excerpt($bioFull, $bioLimit);
+      $bioTruncated = strlen($bioFull) > $bioLimit;
+      ?>
+
+      <p class="mb-4" style="max-width:640px; color:var(--text-muted); line-height:1.75;">
+        <?= e($bioShort) ?>
+        <?php if ($bioTruncated): ?>
+          <a href="<?= BASE_URL ?>/?page=about"
+            style="color:#7c3aed; text-decoration:none; font-weight:600; white-space:nowrap;">
+            Selengkapnya →
+          </a>
+        <?php endif; ?>
+      </p>
 
         <div class="d-flex gap-2 flex-wrap">
           <a href="<?= BASE_URL ?>/?page=contact" class="btn btn-primary px-4 py-2">

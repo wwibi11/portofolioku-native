@@ -1,5 +1,5 @@
 /* ============================================================
-   PORTOFOLIO - STYLE.CSS
+   PORTOFOLIO - STYLE.CSS (FINAL)
    ============================================================ */
 
 /* ==================== VARIABEL ==================== */
@@ -7,11 +7,17 @@
   --primary: #7c3aed;
   --primary-dark: #6d28d9;
   --primary-light: #a78bfa;
+  --primary-soft: #ede9fe;
+  --accent: #f59e0b;
+  --accent-hover: #d97706;
   --text-dark: #0f172a;
   --text-muted: #64748b;
+  --text-light: #94a3b8;
   --footer-bg: #0f172a;
   --footer-text: #94a3b8;
   --footer-border: #1e293b;
+  --card-radius: 16px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ==================== RESET & BASE ==================== */
@@ -25,36 +31,46 @@ html {
 
 body {
   color: var(--text-dark);
-  padding-top: 80px;   /* karena navbar fixed */
-  background: #fff;
+  padding-top: 80px;
+  background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 50%, #e0e7ff 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 a {
   text-decoration: none;
+  transition: var(--transition);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* ==================== NAVBAR ==================== */
 .navbar {
   padding: 1rem 0;
   transition: 0.3s;
-  background: #fff;
-  border-bottom: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
 }
 
 .navbar .nav-link {
-  color: var(--text-dark) !important;
-  font-size: 1rem;
+  color: var(--text-muted) !important;
+  font-size: 0.95rem;
+  font-weight: 500;
   padding: 0.5rem 1rem !important;
+  border-radius: 10px;
   transition: 0.2s;
 }
 
-.navbar .nav-link:hover {
-  color: var(--primary) !important;
-}
-
+.navbar .nav-link:hover,
 .navbar .nav-link.active {
   color: var(--primary) !important;
-  font-weight: 600;
+  background: var(--primary-soft);
 }
 
 .brand-logo {
@@ -86,6 +102,120 @@ a {
   margin-bottom: 3rem;
 }
 
+/* ==================== SECTION BACKGROUND TRANSPARAN ==================== */
+.section.bg-light {
+  background: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 60px 0;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.section.bg-light .container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Section yang tidak bg-light — padding normal */
+.section {
+  padding: 60px 0;
+}
+
+/* ==================== HERO ==================== */
+.hero {
+  padding: 100px 0 60px;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.hero h1 span,
+.hero .text-primary {
+  color: var(--primary) !important;
+}
+
+.hero .lead {
+  color: var(--text-muted);
+  font-size: 1.25rem;
+}
+
+.hero img.rounded-circle {
+  border: 5px solid #ffffff;
+  box-shadow: 0 20px 60px rgba(124, 58, 237, 0.2);
+}
+
+/* ==================== TOMBOL AMBER (HANYA HERO) ==================== */
+.hero .btn-primary,
+.hero .btn-primary:focus,
+.hero .btn-primary:active {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.25);
+  transition: var(--transition);
+}
+
+.hero .btn-primary:hover {
+  background: var(--accent-hover) !important;
+  border-color: var(--accent-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.35);
+  color: #ffffff !important;
+}
+
+.hero .btn-outline-dark,
+.hero .btn-outline-primary,
+.hero .btn-outline-secondary {
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  border-width: 2px !important;
+  font-weight: 600;
+  background: transparent !important;
+  transition: var(--transition);
+}
+
+.hero .btn-outline-dark:hover,
+.hero .btn-outline-primary:hover,
+.hero .btn-outline-secondary:hover {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.25);
+}
+
+/* ==================== TOMBOL DEFAULT (NON-HERO) ==================== */
+.btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.btn-outline-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+  font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
 /* ==================== PORTFOLIO GRID ==================== */
 .portfolio-item {
   margin-bottom: 3rem;
@@ -105,7 +235,7 @@ a {
 }
 
 .portfolio-thumb:hover {
-  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.15);
   transform: translateY(-4px);
 }
 
@@ -139,23 +269,26 @@ a {
   line-height: 1.7;
 }
 
-/* ==================== HERO ==================== */
-.hero {
-  padding: 100px 0 60px;
+/* ==================== CARD ==================== */
+.card {
+  border-radius: var(--card-radius);
+  transition: all 0.3s;
+  border: 1px solid #f1f5f9;
 }
 
-.hero h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1.1;
+.card:hover {
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.1) !important;
+  transform: translateY(-4px);
+  border-color: var(--primary-soft);
 }
 
-.hero .lead {
-  color: var(--text-muted);
-  font-size: 1.25rem;
+.badge.bg-primary {
+  background: var(--primary-soft) !important;
+  color: var(--primary) !important;
+  font-weight: 600;
 }
 
-/* ==================== TIMELINE (Pengalaman) ==================== */
+/* ==================== TIMELINE ==================== */
 .timeline {
   border-left: 3px solid var(--primary);
   padding-left: 25px;
@@ -177,7 +310,7 @@ a {
   box-shadow: 0 0 0 3px var(--primary);
 }
 
-/* ==================== SECTION KONTAK (di atas footer) ==================== */
+/* ==================== SECTION KONTAK ==================== */
 .social-circle-light {
   width: 44px;
   height: 44px;
@@ -220,7 +353,6 @@ a {
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  text-transform: capitalize;
 }
 
 .footer-contact {
@@ -230,7 +362,6 @@ a {
 
 .footer-contact a {
   color: var(--footer-text);
-  text-decoration: none;
   transition: 0.2s;
 }
 
@@ -244,7 +375,6 @@ a {
 
 .footer-links a {
   color: var(--footer-text);
-  text-decoration: none;
   transition: 0.2s;
   font-size: 0.95rem;
 }
@@ -254,14 +384,12 @@ a {
   padding-left: 4px;
 }
 
-/* Divider */
 .footer-divider {
   border-color: var(--footer-border);
   opacity: 1;
   margin: 20px 0 40px;
 }
 
-/* Sosial media bulat (versi gelap) */
 .footer-social {
   display: flex;
   justify-content: center;
@@ -291,7 +419,6 @@ a {
   box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
 }
 
-/* Copyright */
 .footer-copy {
   color: #64748b;
   font-size: 0.875rem;
@@ -300,12 +427,10 @@ a {
 .footer-credit {
   color: var(--primary-light);
   font-weight: 600;
-  text-decoration: none;
 }
 
 .footer-credit:hover {
   color: #fff;
-  text-decoration: underline;
 }
 
 /* ==================== SCROLL TO TOP ==================== */
@@ -326,6 +451,7 @@ a {
   box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
   transition: 0.3s;
   z-index: 999;
+  cursor: pointer;
 }
 
 #scrollTop:hover {
@@ -340,8 +466,176 @@ a {
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 768px) {
   .hero h1 { font-size: 2.25rem; }
+  .hero { padding: 60px 0 40px; }
   .section-title { font-size: 1.5rem; }
   .portfolio-title { font-size: 1.35rem; }
   .footer-brand { font-size: 1.5rem; }
   .footer-dark { padding: 50px 0 20px; }
+  .section.bg-light {
+    border-radius: 16px;
+    margin: 16px 12px;
+  }
+}
+
+
+
+/* ============================================
+   FIX — Container & Section Alignment
+   (Paling bawah style.css)
+   ============================================ */
+
+/* Paksa container Bootstrap bekerja */
+.container,
+.container-fluid {
+  max-width: 1140px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+/* Semua section pakai padding yang sama */
+.section {
+  padding: 60px 0 !important;
+}
+
+/* Section bg-light — transparan, bukan card */
+.section.bg-light {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 60px 0 !important;
+  max-width: 100% !important;
+}
+
+/* Hero section — konsisten dengan yang lain */
+.hero {
+  padding: 60px 0 !important;
+}
+
+/* Navbar — konten dalam container */
+.navbar .container {
+  max-width: 1140px !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+/* Mobile — padding lebih kecil */
+@media (max-width: 768px) {
+  .container,
+  .container-fluid,
+  .navbar .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .section,
+  .hero,
+  .section.bg-light {
+    padding: 40px 0 !important;
+  }
+}
+
+/* ============================================
+   BLOG CARD — Soft Transparent Background
+   (Taruh di paling bawah style.css)
+   ============================================ */
+
+/* Card blog — background soft transparan */
+.card {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.06) !important;
+  transition: all 0.3s ease !important;
+  overflow: hidden;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(167, 139, 250, 0.4) !important;
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.12) !important;
+  transform: translateY(-4px);
+}
+
+/* Card body */
+.card-body {
+  background: transparent !important;
+}
+
+/* Card footer (Baca Selengkapnya) */
+.card-footer {
+  background: transparent !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Card image (cover blog) */
+.card-img-top {
+  border-radius: 16px 16px 0 0;
+}
+
+/* Card title */
+.card-title,
+.card h5,
+.card h3 {
+  color: var(--text-dark) !important;
+}
+
+/* Card text */
+.card p,
+.card-text {
+  color: var(--text-muted) !important;
+}
+
+/* Badge kategori di card */
+.card .badge {
+  background: rgba(124, 58, 237, 0.15) !important;
+  color: var(--primary) !important;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 5px 12px;
+}
+
+/* Link "Baca Selengkapnya" */
+.card-footer a,
+.card .text-primary {
+  color: var(--primary) !important;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.card-footer a:hover {
+  color: var(--primary-dark) !important;
+  padding-left: 4px;
+}
+
+/* Blog card tanpa cover — background soft */
+.card .card-img-top[src*="placeholder"],
+.card .card-img-top:not([src]) {
+  background: rgba(237, 233, 254, 0.4) !important;
+}
+
+/* ============================================
+   PORTFOLIO ITEM — Soft Background Juga
+   ============================================ */
+.portfolio-item {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.06);
+}
+
+.portfolio-item:hover {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(167, 139, 250, 0.4);
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.12);
+  transform: translateY(-4px);
 }
