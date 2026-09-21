@@ -113,3 +113,58 @@ function deleteUpload($filename) {
 function input($key, $default = null) {
     return $_POST[$key] ?? $_GET[$key] ?? $default;
 }
+
+/* ============================================
+   FUNGSI TAMBAHAN UNTUK ASSET URL & APP INFO
+   ============================================ */
+
+/**
+ * URL aset di folder assets/
+ * Contoh: asset('css/style.css') → http://localhost/portofolio/assets/css/style.css
+ */
+if (!function_exists('asset')) {
+    function asset($path) {
+        return rtrim(BASE_URL, '/') . '/assets/' . ltrim($path, '/');
+    }
+}
+
+/**
+ * URL file di folder vendor/ (di root project)
+ * Contoh: vendor_asset('bootstrap/css/bootstrap.min.css')
+ */
+if (!function_exists('vendor_asset')) {
+    function vendor_asset($path) {
+        return rtrim(BASE_URL, '/') . '/vendor/' . ltrim($path, '/');
+    }
+}
+
+/**
+ * URL file upload user
+ * Contoh: upload('foto.jpg') → http://localhost/portofolio/assets/uploads/foto.jpg
+ */
+if (!function_exists('upload')) {
+    function upload($filename) {
+        return rtrim(BASE_URL, '/') . '/assets/uploads/' . ltrim($filename, '/');
+    }
+}
+
+/**
+ * Ambil nama aplikasi dari settings DB (fallback ke APP_NAME)
+ */
+if (!function_exists('getAppName')) {
+    function getAppName() {
+        if (isset($GLOBALS['app_settings']['app_name'])) {
+            return $GLOBALS['app_settings']['app_name'];
+        }
+        return defined('APP_NAME') ? APP_NAME : 'Portfolio';
+    }
+}
+
+/**
+ * Ambil versi aplikasi
+ */
+if (!function_exists('getAppVersion')) {
+    function getAppVersion() {
+        return '1.0.0';
+    }
+}

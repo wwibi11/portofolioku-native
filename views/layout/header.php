@@ -3,12 +3,16 @@ require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../config/helper.php';
 
-// Ambil nama dari profil
 $profil = db()->query("SELECT * FROM profil WHERE id = 1")->fetch() ?: [];
-$namaBrand = $profil['nama'] ?? 'Nama Anda';
-$namaParts = explode(' ', $namaBrand);
-$brand1 = strtolower($namaParts[0] ?? 'nama');
-$brand2 = strtolower($namaParts[1] ?? 'anda');
+
+// Ambil brand dari DB, fallback ke nama
+$brand1 = !empty($profil['brand_1']) 
+    ? $profil['brand_1'] 
+    : strtolower(explode(' ', $profil['nama'] ?? 'nama')[0]);
+
+$brand2 = !empty($profil['brand_2']) 
+    ? $profil['brand_2'] 
+    : strtolower(explode(' ', $profil['nama'] ?? 'anda')[1] ?? 'anda');
 
 // Deteksi halaman aktif
 $currentPage = $_GET['page'] ?? 'home';

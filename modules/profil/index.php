@@ -15,7 +15,9 @@ try {
 // Kalau belum ada, siapkan default
 if (!$profil) {
     $profil = [
-        'id' => 1, 'nama' => '', 'gelar' => '', 'bio' => '', 'foto' => '',
+        'id' => 1, 'nama' => '', 'gelar_akademik' => '',
+        'brand_1' => 'wisnu', 'brand_2' => 'wibisono',
+        'gelar' => '', 'bio' => '', 'foto' => '',
         'email' => '', 'telepon' => '', 'whatsapp' => '', 'telegram' => '',
         'alamat' => '', 'website' => '', 'github' => '', 'linkedin' => '',
         'instagram' => '', 'threads' => '', 'facebook' => '', 'twitter' => '',
@@ -52,7 +54,7 @@ if (!$profil) {
     <form action="?module=profil&action=save" method="post" enctype="multipart/form-data">
         <div class="row">
 
-            <!-- KOLOM KIRI — Info Utama -->
+            <!-- KOLOM KIRI -->
             <div class="col-lg-8">
 
                 <!-- Info Dasar -->
@@ -65,6 +67,7 @@ if (!$profil) {
                     </div>
                     <div class="card-body">
 
+                        <!-- Baris 1: Nama + Gelar Akademik -->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -72,26 +75,69 @@ if (!$profil) {
                                         Nama Lengkap <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" name="nama" class="form-control"
-                                           value="<?= htmlspecialchars($profil['nama']) ?>"
-                                           required maxlength="100">
+                                        value="<?= htmlspecialchars($profil['nama']) ?>"
+                                        required maxlength="100">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="font-weight-bold" style="font-size: 13px;">Gelar / Profesi</label>
-                                    <input type="text" name="gelar" class="form-control"
-                                           value="<?= htmlspecialchars($profil['gelar']) ?>"
-                                           placeholder="Web Developer & UI Designer"
-                                           maxlength="100">
+                                    <label class="font-weight-bold" style="font-size: 13px;">
+                                        Gelar Akademik
+                                    </label>
+                                    <input type="text" name="gelar_akademik" class="form-control"
+                                        value="<?= htmlspecialchars($profil['gelar_akademik'] ?? '') ?>"
+                                        placeholder="S.Kom., M.Kom., S.T., dll"
+                                        maxlength="50">
+                                    <small class="text-muted">Tampil setelah nama.</small>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Baris 2: Gelar / Profesi -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" style="font-size: 13px;">Gelar / Profesi</label>
+                                    <input type="text" name="gelar" class="form-control"
+                                        value="<?= htmlspecialchars($profil['gelar']) ?>"
+                                        placeholder="Web Developer & UI Designer"
+                                        maxlength="100">
+                                    <small class="text-muted">Tampil sebagai subtitle di bawah nama.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Baris 3: Brand Logo -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" style="font-size: 13px;">
+                                        Brand Logo — Kata 1
+                                    </label>
+                                    <input type="text" name="brand_1" class="form-control"
+                                           value="<?= htmlspecialchars($profil['brand_1'] ?? 'wisnu') ?>"
+                                           placeholder="wisnu" maxlength="50">
+                                    <small class="text-muted">Logo navbar kiri (hitam).</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="font-weight-bold" style="font-size: 13px;">
+                                        Brand Logo — Kata 2
+                                    </label>
+                                    <input type="text" name="brand_2" class="form-control"
+                                           value="<?= htmlspecialchars($profil['brand_2'] ?? 'wibisono') ?>"
+                                           placeholder="wibisono" maxlength="50">
+                                    <small class="text-muted">Logo navbar kanan (ungu).</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Baris 4: Bio -->
                         <div class="form-group mb-0">
                             <label class="font-weight-bold" style="font-size: 13px;">Bio</label>
                             <textarea name="bio" class="form-control" rows="4"
-                                      placeholder="Ceritakan singkat tentang Anda..."
-                                      ><?= htmlspecialchars($profil['bio']) ?></textarea>
+                                      placeholder="Ceritakan singkat tentang Anda..."><?= htmlspecialchars($profil['bio']) ?></textarea>
                             <small class="text-muted">Tampil di halaman "Tentang Saya".</small>
                         </div>
 
@@ -282,7 +328,7 @@ if (!$profil) {
 
             </div>
 
-            <!-- KOLOM KANAN — Foto & CV -->
+            <!-- KOLOM KANAN -->
             <div class="col-lg-4">
 
                 <!-- Foto Profil -->
@@ -316,8 +362,7 @@ if (!$profil) {
                                class="form-control-file" accept="image/*"
                                onchange="previewFoto(this)">
                         <small class="text-muted d-block mt-2">
-                            Format: JPG, PNG, WebP. Max 2MB.<br>
-                            Ukuran ideal: 500×500 px (rasio 1:1).
+                            Format: JPG, PNG, WebP. Max 2MB.
                         </small>
 
                     </div>
@@ -338,9 +383,7 @@ if (!$profil) {
                                 <i class="fas fa-file-pdf"></i>
                                 CV saat ini:
                                 <a href="<?= upload($profil['cv_file']) ?>" target="_blank"
-                                   class="font-weight-bold">
-                                    Lihat
-                                </a>
+                                   class="font-weight-bold">Lihat</a>
                             </div>
                         <?php else: ?>
                             <div class="alert alert-secondary py-2 mb-2" style="border-radius: 8px; font-size: 13px;">
@@ -350,9 +393,7 @@ if (!$profil) {
 
                         <input type="hidden" name="cv_lama" value="<?= htmlspecialchars($profil['cv_file']) ?>">
                         <input type="file" name="cv_file" class="form-control-file" accept=".pdf">
-                        <small class="text-muted d-block mt-2">
-                            Format: PDF. Max 5MB.
-                        </small>
+                        <small class="text-muted d-block mt-2">Format: PDF. Max 5MB.</small>
 
                     </div>
                 </div>

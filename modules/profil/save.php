@@ -8,23 +8,26 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Ambil input
-$nama     = trim($_POST['nama'] ?? '');
-$gelar    = trim($_POST['gelar'] ?? '');
-$bio      = trim($_POST['bio'] ?? '');
-$email    = trim($_POST['email'] ?? '');
-$telepon  = trim($_POST['telepon'] ?? '');
-$whatsapp = trim($_POST['whatsapp'] ?? '');
-$telegram = trim($_POST['telegram'] ?? '');
-$alamat   = trim($_POST['alamat'] ?? '');
-$website  = trim($_POST['website'] ?? '');
-$github   = trim($_POST['github'] ?? '');
-$linkedin = trim($_POST['linkedin'] ?? '');
-$instagram= trim($_POST['instagram'] ?? '');
-$threads  = trim($_POST['threads'] ?? '');
-$facebook = trim($_POST['facebook'] ?? '');
-$twitter  = trim($_POST['twitter'] ?? '');
-$youtube  = trim($_POST['youtube'] ?? '');
-$tiktok   = trim($_POST['tiktok'] ?? '');
+$nama            = trim($_POST['nama'] ?? '');
+$gelarAkademik   = trim($_POST['gelar_akademik'] ?? '');
+$brand1          = strtolower(trim($_POST['brand_1'] ?? ''));
+$brand2          = strtolower(trim($_POST['brand_2'] ?? ''));
+$gelar           = trim($_POST['gelar'] ?? '');
+$bio             = trim($_POST['bio'] ?? '');
+$email           = trim($_POST['email'] ?? '');
+$telepon         = trim($_POST['telepon'] ?? '');
+$whatsapp        = trim($_POST['whatsapp'] ?? '');
+$telegram        = trim($_POST['telegram'] ?? '');
+$alamat          = trim($_POST['alamat'] ?? '');
+$website         = trim($_POST['website'] ?? '');
+$github          = trim($_POST['github'] ?? '');
+$linkedin        = trim($_POST['linkedin'] ?? '');
+$instagram       = trim($_POST['instagram'] ?? '');
+$threads         = trim($_POST['threads'] ?? '');
+$facebook        = trim($_POST['facebook'] ?? '');
+$twitter         = trim($_POST['twitter'] ?? '');
+$youtube         = trim($_POST['youtube'] ?? '');
+$tiktok          = trim($_POST['tiktok'] ?? '');
 
 if ($nama === '') {
     setFlash('danger', 'Nama wajib diisi.');
@@ -35,13 +38,13 @@ if ($nama === '') {
 $foto = $_POST['foto_lama'] ?? '';
 if (!empty($_FILES['foto']['name'])) {
     $result = uploadImage($_FILES['foto'], 'profil');
-    if ($result['success']) {
+    if (!empty($result['success'])) {
         if (!empty($_POST['foto_lama'])) {
             deleteUpload($_POST['foto_lama']);
         }
         $foto = $result['filename'];
     } else {
-        setFlash('warning', 'Upload foto gagal: ' . $result['message']);
+        setFlash('warning', 'Upload foto gagal: ' . ($result['message'] ?? 'Unknown'));
     }
 }
 
@@ -76,31 +79,65 @@ try {
 
     if ($exists) {
         $sql = "UPDATE profil SET
-                    nama = :nama, gelar = :gelar, bio = :bio, foto = :foto,
-                    email = :email, telepon = :telepon, whatsapp = :wa,
-                    telegram = :tg, alamat = :alamat, website = :website,
-                    github = :github, linkedin = :linkedin, instagram = :ig,
-                    threads = :threads, facebook = :fb, twitter = :tw,
-                    youtube = :yt, tiktok = :tt, cv_file = :cv
+                    nama = :nama,
+                    gelar_akademik = :gelar_akademik,
+                    brand_1 = :brand1,
+                    brand_2 = :brand2,
+                    gelar = :gelar,
+                    bio = :bio,
+                    foto = :foto,
+                    email = :email,
+                    telepon = :telepon,
+                    whatsapp = :wa,
+                    telegram = :tg,
+                    alamat = :alamat,
+                    website = :website,
+                    github = :github,
+                    linkedin = :linkedin,
+                    instagram = :ig,
+                    threads = :threads,
+                    facebook = :fb,
+                    twitter = :tw,
+                    youtube = :yt,
+                    tiktok = :tt,
+                    cv_file = :cv
                 WHERE id = 1";
     } else {
         $sql = "INSERT INTO profil
-                    (id, nama, gelar, bio, foto, email, telepon, whatsapp,
-                     telegram, alamat, website, github, linkedin, instagram,
-                     threads, facebook, twitter, youtube, tiktok, cv_file)
+                    (id, nama, gelar_akademik, brand_1, brand_2, gelar, bio, foto,
+                     email, telepon, whatsapp, telegram, alamat, website,
+                     github, linkedin, instagram, threads, facebook, twitter,
+                     youtube, tiktok, cv_file)
                 VALUES
-                    (1, :nama, :gelar, :bio, :foto, :email, :telepon, :wa,
-                     :tg, :alamat, :website, :github, :linkedin, :ig,
-                     :threads, :fb, :tw, :yt, :tt, :cv)";
+                    (1, :nama, :gelar_akademik, :brand1, :brand2, :gelar, :bio, :foto,
+                     :email, :telepon, :wa, :tg, :alamat, :website,
+                     :github, :linkedin, :ig, :threads, :fb, :tw,
+                     :yt, :tt, :cv)";
     }
 
     $params = [
-        ':nama' => $nama, ':gelar' => $gelar, ':bio' => $bio, ':foto' => $foto,
-        ':email' => $email, ':telepon' => $telepon, ':wa' => $whatsapp,
-        ':tg' => $telegram, ':alamat' => $alamat, ':website' => $website,
-        ':github' => $github, ':linkedin' => $linkedin, ':ig' => $instagram,
-        ':threads' => $threads, ':fb' => $facebook, ':tw' => $twitter,
-        ':yt' => $youtube, ':tt' => $tiktok, ':cv' => $cvFile,
+        ':nama'            => $nama,
+        ':gelar_akademik'  => $gelarAkademik,
+        ':brand1'          => $brand1,
+        ':brand2'          => $brand2,
+        ':gelar'           => $gelar,
+        ':bio'             => $bio,
+        ':foto'            => $foto,
+        ':email'           => $email,
+        ':telepon'         => $telepon,
+        ':wa'              => $whatsapp,
+        ':tg'              => $telegram,
+        ':alamat'          => $alamat,
+        ':website'         => $website,
+        ':github'          => $github,
+        ':linkedin'        => $linkedin,
+        ':ig'              => $instagram,
+        ':threads'         => $threads,
+        ':fb'              => $facebook,
+        ':tw'              => $twitter,
+        ':yt'              => $youtube,
+        ':tt'              => $tiktok,
+        ':cv'              => $cvFile,
     ];
 
     db()->prepare($sql)->execute($params);
