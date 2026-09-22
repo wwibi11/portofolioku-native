@@ -9,22 +9,43 @@ $profil = db()->query("SELECT * FROM profil WHERE id = 1")->fetch() ?: [];
 
       <!-- KIRI: Text -->
       <div class="col-lg-7">
-        <h1 class="mb-3">
-          Halo, saya
-          <span style="color: #7c3aed;">
-            <?= e($profil['nama'] ?? 'Nama') ?><?= !empty($profil['gelar_akademik']) ? ', ' . e($profil['gelar_akademik']) : '' ?>
-          </span>
-        </h1>
+      <h1 class="mb-3">
+        <span class="hero-halo">Halo, saya</span>
+        <span class="hero-nama">
+          <?= e($profil['nama'] ?? 'Nama') ?><?= !empty($profil['gelar_akademik']) ? ', ' . e($profil['gelar_akademik']) : '' ?>
+        </span>
+      </h1>
+  
 
-        <p class="lead mb-3" style="color: #7c3aed; font-weight: 600;">
+       <p class="lead hero-profesi">
           <?= e($profil['gelar'] ?? 'Web Developer') ?>
         </p>
 
-        <?php
+       <?php
         $bioFull = trim($profil['bio'] ?? '');
-        $bioLimit = 300;
-        $bioShort = excerpt($bioFull, $bioLimit);
-        $bioTruncated = strlen($bioFull) > $bioLimit;
+        $bioLimit = 250;
+        $bioTruncated = false;
+
+        if (strlen($bioFull) > $bioLimit) {
+            // Cari titik terakhir sebelum limit
+            $cut = substr($bioFull, 0, $bioLimit);
+            $lastDot = strrpos($cut, '.');
+
+            if ($lastDot !== false && $lastDot > 100) {
+                // Potong di titik
+                $bioShort = substr($bioFull, 0, $lastDot + 1);
+                $bioTruncated = true;
+            } else {
+                // Kalau tidak ada titik, potong di spasi terakhir
+                $lastSpace = strrpos($cut, ' ');
+                $bioShort = ($lastSpace !== false)
+                    ? substr($bioFull, 0, $lastSpace) . '...'
+                    : $cut . '...';
+                $bioTruncated = true;
+            }
+        } else {
+            $bioShort = $bioFull;
+        }
         ?>
 
         <!-- BIO — dengan fallback -->
